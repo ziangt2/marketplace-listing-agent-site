@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Marketplace Listing Agent</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Amazon + TikTok Shop</p>
+        <h1>Marketplace Listing Agent</h1>
+      </div>
+      <div class="top-actions">
+        <span class="status-pill" id="connectionStatus">Vercel mode</span>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section class="panel command-panel" aria-labelledby="command-title">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Keyword Collector</p>
+            <h2 id="command-title">输入关键词，生成真实来源词库</h2>
+          </div>
+          <button class="ghost-button" id="sampleButton" type="button">示例 yoga mat</button>
+        </div>
+
+        <div class="platform-row" role="group" aria-label="平台">
+          <button class="platform-button is-active" type="button" data-platform="amazon">Amazon</button>
+          <button class="platform-button" type="button" data-platform="tiktok_shop">TikTok Shop</button>
+        </div>
+
+        <div class="field-grid">
+          <label class="field">
+            <span>产品关键词</span>
+            <input id="keywordInput" type="text" placeholder="yoga mat" autocomplete="off" />
+          </label>
+          <label class="field">
+            <span>目标市场</span>
+            <select id="regionInput">
+              <option value="US">US</option>
+              <option value="UK">UK</option>
+              <option value="CA">CA</option>
+              <option value="AU">AU</option>
+              <option value="DE">DE</option>
+              <option value="ES-BUNDLE">Spanish Bundle</option>
+              <option value="US-ES">US Spanish</option>
+              <option value="ES">ES Spain</option>
+              <option value="MX">MX Mexico</option>
+              <option value="CO">CO Colombia</option>
+              <option value="CL">CL Chile</option>
+              <option value="AR">AR Argentina</option>
+              <option value="PE">PE Peru</option>
+              <option value="LATAM-ES">LATAM Spanish</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>目标买家</span>
+            <input id="buyerInput" type="text" placeholder="home workout buyers, beginners" autocomplete="off" />
+          </label>
+          <label class="field">
+            <span>价格带</span>
+            <input id="priceInput" type="text" placeholder="$19.99-$49.99" autocomplete="off" />
+          </label>
+        </div>
+
+        <div class="local-panel">
+          <label class="toggle-line">
+            <input id="localModeInput" type="checkbox" checked />
+            <span>优先使用 localhost 本地采集模式</span>
+          </label>
+          <label class="field local-url">
+            <span>Localhost API</span>
+            <input id="localUrlInput" type="url" value="http://127.0.0.1:8066" />
+          </label>
+          <p class="helper-text">
+            本地模式会先请求 <code>/api/marketplace-collect</code>。本地未开启时可取消勾选，使用 Vercel API。
+          </p>
+        </div>
+
+        <div class="action-row">
+          <button class="primary-button" id="collectButton" type="button">采集词库</button>
+          <button class="secondary-button" id="buildButton" type="button">重建词库</button>
+          <button class="ghost-button" id="clearButton" type="button">清空</button>
+        </div>
+
+        <p id="progressText" class="progress-text">准备采集。不会生成模拟 ABA、模拟 Google Trends 热度或假销量。</p>
+      </section>
+
+      <section class="panel source-panel" aria-labelledby="source-title">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Sources</p>
+            <h2 id="source-title">采集结果与真实报告</h2>
+          </div>
+          <label class="file-button" for="fileInput">上传真实报告 / CSV / TXT / XLSX</label>
+          <input id="fileInput" class="sr-only" type="file" multiple accept=".csv,.txt,.tsv,.xlsx,.xls" />
+        </div>
+
+        <div class="source-grid">
+          <label class="source-field">
+            <span>商品标题 / 竞品标题</span>
+            <textarea id="productText" rows="7" placeholder="采集后自动填入；也可以粘贴 Amazon/TikTok 商品标题"></textarea>
+          </label>
+          <label class="source-field">
+            <span>评论 / 评测 / FAQ</span>
+            <textarea id="reviewText" rows="7" placeholder="粘贴真实评论、评测、FAQ；没有就留空"></textarea>
+          </label>
+          <label class="source-field">
+            <span>Google Trends / Ads / SQP / TikTok 真实报告文本</span>
+            <textarea id="reportText" rows="7" placeholder="粘贴真实 Google Trends / Seller Center / Ads / TikTok 导出内容；没有就留空"></textarea>
+          </label>
+        </div>
+
+        <div class="upload-list" id="uploadList"></div>
+      </section>
+
+      <section class="metrics-grid" aria-label="数据概览">
+        <article class="metric-card">
+          <span>真实/公开来源</span>
+          <strong id="sourceCount">0</strong>
+        </article>
+        <article class="metric-card">
+          <span>词库词条</span>
+          <strong id="keywordCount">0</strong>
+        </article>
+        <article class="metric-card">
+          <span>真实报告</span>
+          <strong id="reportCount">0</strong>
+        </article>
+        <article class="metric-card">
+          <span>无模拟字段</span>
+          <strong id="truthCount">OK</strong>
+        </article>
+      </section>
+
+      <section class="panel results-panel" aria-labelledby="library-title">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Keyword Library</p>
+            <h2 id="library-title">平台词库模板</h2>
+          </div>
+          <div class="button-cluster">
+            <button class="ghost-button" id="downloadCsvButton" type="button" disabled>下载 CSV</button>
+            <button class="ghost-button" id="downloadXlsxButton" type="button" disabled>下载 XLSX</button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>高频词类型</th>
+                <th>特征词</th>
+                <th>Weight</th>
+                <th>出现次数</th>
+                <th>原始搜索词</th>
+                <th>地区/语种</th>
+                <th>结论</th>
+              </tr>
+            </thead>
+            <tbody id="keywordTable">
+              <tr>
+                <td colspan="7" class="empty-cell">等待采集</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel package-panel" aria-labelledby="package-title">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Output</p>
+            <h2 id="package-title">词库来源审计</h2>
+          </div>
+          <div class="button-cluster">
+            <button class="ghost-button" id="copyButton" type="button" disabled>复制</button>
+            <button class="ghost-button" id="downloadTxtButton" type="button" disabled>下载 TXT</button>
+          </div>
+        </div>
+        <pre id="packageOutput" class="package-output">采集后生成。没有真实数据的字段保持空白，不会模拟。</pre>
+      </section>
+
+      <section class="video-studio is-hidden" aria-labelledby="video-studio-title" hidden>
+        <div class="studio-head">
+          <div>
+            <p class="eyebrow">Video Studio</p>
+            <h2 id="video-studio-title">Lovart 式产品演示视频生成</h2>
+          </div>
+          <div class="studio-actions">
+            <button class="ghost-button dark" id="refreshVideoPromptsButton" type="button">刷新提示词</button>
+            <button class="ghost-button dark" id="checkRecentVideosButton" type="button">查最近任务</button>
+            <button class="primary-button" id="runVideoPipelineButton" type="button">按步骤生成</button>
+          </div>
+        </div>
+
+        <div class="video-settings">
+          <label class="field api-key-field">
+            <span>OpenAI API Key</span>
+            <input id="openaiApiKeyInput" type="password" placeholder="sk-... 测试版可填这里" autocomplete="off" />
+          </label>
+          <label class="field api-key-field">
+            <span>Google Gemini API Key</span>
+            <input id="googleApiKeyInput" type="password" placeholder="AIza... 跑 Veo 3.1" autocomplete="off" />
+          </label>
+          <label class="field">
+            <span>图片模型</span>
+            <select id="imageModelSelect">
+              <option value="gemini-3.1-flash-image-preview">Google Gemini 3.1 Image</option>
+              <option value="gemini-2.5-flash-image">Google Gemini 2.5 Image</option>
+              <option value="gemini-3-pro-image-preview">Google Gemini 3 Pro Image</option>
+              <option value="gpt-image-2">OpenAI GPT Image 2</option>
+              <option value="gpt-image-1.5">OpenAI GPT Image 1.5</option>
+              <option value="gpt-image-1">OpenAI GPT Image 1</option>
+              <option value="gpt-image-1-mini">OpenAI GPT Image 1 Mini</option>
+              <option value="external">外部图片模型占位</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>图片清晰度</span>
+            <select id="imageQualitySelect">
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+              <option value="low">Low</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>视频模型</span>
+            <select id="videoModelSelect">
+              <option value="veo-3.1-generate-preview">Google Veo 3.1</option>
+              <option value="veo-3.1-fast-generate-preview">Google Veo 3.1 Fast</option>
+              <option value="veo-3.1-lite-generate-preview">Google Veo 3.1 Lite</option>
+              <option value="sora-2">OpenAI Sora 2</option>
+              <option value="sora-2-pro">OpenAI Sora 2 Pro</option>
+              <option value="seedance">Seedance 占位</option>
+              <option value="kling">Kling 占位</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>清晰度 / 画幅</span>
+            <select id="videoSizeSelect">
+              <option value="720x1280">720x1280 竖屏</option>
+              <option value="1024x1792">1024x1792 高清竖屏</option>
+              <option value="1280x720">1280x720 横屏</option>
+              <option value="1792x1024">1792x1024 高清横屏</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>时长</span>
+            <select id="videoSecondsSelect">
+              <option value="4">4 秒测试</option>
+              <option value="6">6 秒短片</option>
+              <option value="8">8 秒单段上限</option>
+              <option value="15">15 秒延长</option>
+              <option value="22">22 秒延长</option>
+              <option value="29">29 秒延长</option>
+              <option value="36">36 秒延长</option>
+              <option value="57">57 秒长片</option>
+              <option value="85">85 秒长片</option>
+              <option value="120">120 秒长片</option>
+              <option value="148">148 秒最长</option>
+            </select>
+          </label>
+        </div>
+
+        <p class="studio-note">
+          测试版可以在网页填 key，会保存在当前浏览器。正式上线请改用 <code>.env.local</code> 或 Vercel Environment Variables。
+        </p>
+
+        <div class="pipeline-progress" aria-live="polite">
+          <div class="progress-topline">
+            <strong id="pipelineStatus">等待开始</strong>
+            <span id="pipelinePercent">0%</span>
+          </div>
+          <div class="progress-track">
+            <span id="pipelineBar"></span>
+          </div>
+          <div class="pipeline-log" id="pipelineLog">准备好后点击“按步骤生成”。</div>
+        </div>
+
+        <div class="studio-board">
+          <article class="studio-step" data-step="product_reference">
+            <div class="step-title">
+              <span>第一步</span>
+              <strong>产品参考板</strong>
+            </div>
+            <div class="asset-preview" id="productReferencePreview">Product Board</div>
+            <textarea id="productReferencePrompt" rows="8"></textarea>
+            <button class="secondary-button dark" data-generate-step="product_reference" type="button">生成产品参考图</button>
+            <p class="step-status" id="productReferenceStatus">等待</p>
+          </article>
+
+          <article class="studio-step" data-step="actor_reference">
+            <div class="step-title">
+              <span>第二步</span>
+              <strong>手模/真人固定</strong>
+            </div>
+            <div class="asset-preview" id="actorReferencePreview">Actor / Hands</div>
+            <textarea id="actorReferencePrompt" rows="8"></textarea>
+            <button class="secondary-button dark" data-generate-step="actor_reference" type="button">生成人物参考</button>
+            <p class="step-status" id="actorReferenceStatus">等待</p>
+          </article>
+
+          <article class="studio-step" data-step="storyboard">
+            <div class="step-title">
+              <span>第三步</span>
+              <strong>故事板生成</strong>
+            </div>
+            <div class="asset-preview" id="storyboardPreview">Storyboard</div>
+            <textarea id="storyboardPrompt" rows="8"></textarea>
+            <button class="secondary-button dark" data-generate-step="storyboard" type="button">生成故事板</button>
+            <p class="step-status" id="storyboardStatus">等待</p>
+          </article>
+
+          <article class="studio-step" data-step="tone_reference">
+            <div class="step-title">
+              <span>第四步</span>
+              <strong>调性图生成</strong>
+            </div>
+            <div class="asset-preview" id="toneReferencePreview">Tone Board</div>
+            <textarea id="toneReferencePrompt" rows="8"></textarea>
+            <button class="secondary-button dark" data-generate-step="tone_reference" type="button">生成调性图</button>
+            <p class="step-status" id="toneReferenceStatus">等待</p>
+          </article>
+
+          <article class="studio-step video-final" data-step="video">
+            <div class="step-title">
+              <span>第五步</span>
+              <strong>产品演示视频</strong>
+            </div>
+            <div class="asset-preview video-preview" id="videoPreview">Video</div>
+            <textarea id="videoPrompt" rows="10"></textarea>
+            <div class="button-cluster">
+              <button class="primary-button" id="generateVideoButton" type="button">提交视频任务</button>
+              <button class="secondary-button dark" id="pollVideoButton" type="button" disabled>刷新进度</button>
+              <button class="secondary-button dark" id="quickRetryVideoButton" type="button">4秒低清重试</button>
+              <button class="secondary-button dark" id="localPreviewVideoButton" type="button">本地预览视频</button>
+              <button class="secondary-button dark" id="downloadVideoButton" type="button" disabled>下载视频</button>
+            </div>
+            <p class="step-status" id="videoStatus">等待</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

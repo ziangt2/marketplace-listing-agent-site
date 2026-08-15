@@ -1,0 +1,9 @@
+{
+  "name": "marketplace-listing-agent-site",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "node collector-server.js",
+    "start": "node collector-server.js"
+  }
+}
