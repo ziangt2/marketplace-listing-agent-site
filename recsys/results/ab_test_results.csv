@@ -1,0 +1,2 @@
+metric,control_users,treatment_users,control_converted_users,treatment_converted_users,control_rate,treatment_rate,absolute_uplift,relative_uplift,z_statistic,p_value,ci_95_lower,ci_95_upper,statistically_significant_0_05
+user_purchase_conversion,7396,7604,2354,2505,0.31828015143320715,0.32943187795896894,0.011151726525761796,0.035037455133616925,1.4591280443167447,0.1445298687698706,-0.00382482908312228,0.026128282134645874,False

@@ -1,0 +1,21 @@
+metric,value
+temporal_cutoff,2026-02-15 22:51:28
+train_event_rows,267536
+heldout_interactions,3954
+test_positive_users,4635
+users_with_unseen_test_positive,4123
+excluded_for_history_or_no_unseen_target,681
+inner_validation_cutoff,2026-02-01 22:51:28
+inner_validation_users,4580
+popularity_catalog_coverage@10,0.03
+popularity_mean_popularity_percentile@10,0.9916386947390821
+popularity_long_tail_share@10,0.0
+item_item_cosine_catalog_coverage@10,0.5433333333333333
+item_item_cosine_mean_popularity_percentile@10,0.8535190584881395
+item_item_cosine_long_tail_share@10,0.00687910976226606
+content_catalog_coverage@10,1.0
+content_mean_popularity_percentile@10,0.4789148665411835
+content_long_tail_share@10,0.525821952453212
+hybrid_catalog_coverage@10,0.505
+hybrid_mean_popularity_percentile@10,0.8719113292006658
+hybrid_long_tail_share@10,0.0017956499747091553

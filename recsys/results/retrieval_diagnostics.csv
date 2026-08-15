@@ -1,0 +1,19 @@
+metric,value
+inner_cutoff,2026-02-01 22:51:28
+final_cutoff,2026-02-15 22:51:28
+inner_train_event_rows,175589
+collaborative_m,100
+content_m,100
+popularity_m,10
+validation_users,4580.0
+collaborative_candidate_recall,0.7932314410480349
+content_candidate_recall,0.7377729257641922
+popularity_candidate_recall,0.06026200873362445
+union_candidate_recall,0.8390829694323144
+average_candidate_union_size,134.0812227074236
+collaborative_only_candidate_fraction,0.21245513701530064
+content_only_candidate_fraction,0.21245513701530064
+collaborative_content_both_fraction,0.5333614507272526
+popularity_fallback_only_fraction,0.041728275242146125
+mean_collaborative_content_jaccard,0.5687512848205701
+content_unique_target_hit_share,0.04735883424408015

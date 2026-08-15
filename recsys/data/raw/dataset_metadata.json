@@ -1,0 +1,17 @@
+{
+  "seed": 2027,
+  "users": 15000,
+  "products": 600,
+  "categories": 10,
+  "sessions": 58591,
+  "total_events": 330270,
+  "views": 240784,
+  "clicks": 58215,
+  "add_to_carts": 20709,
+  "purchases": 10562,
+  "control_users": 7396,
+  "treatment_users": 7604,
+  "assignment_sha256": "373854999b124947ad751bf46efbb77fc551b2fef2282dc457b5a5625be9f9ab",
+  "observation_start": "2026-01-05 02:26:54",
+  "observation_end": "2026-03-01 22:51:28"
+}

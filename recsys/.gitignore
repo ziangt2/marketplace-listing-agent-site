@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.venv/
+venv/
+.pytest_cache/
+
+# Reproducible generated data; recreate with python3 src/run_all.py
+data/raw/*.csv
+data/processed/*.sqlite*
+data/processed/recommendation_holdout.csv
+data/processed/hybrid_validation_holdout.csv
+
+# Keep compact, auditable result CSVs and metadata under version control.

@@ -1,0 +1,5 @@
+model,catalog_coverage@10,mean_popularity_percentile@10,long_tail_share@10,long_tail_definition
+Popularity,0.03,0.9916386947390821,0.0,bottom 50% of products by pre-final training popularity
+Collaborative,0.5433333333333333,0.8535190584881395,0.00687910976226606,bottom 50% of products by pre-final training popularity
+Content,1.0,0.4789148665411835,0.525821952453212,bottom 50% of products by pre-final training popularity
+Hybrid,0.505,0.8719113292006658,0.0017956499747091553,bottom 50% of products by pre-final training popularity

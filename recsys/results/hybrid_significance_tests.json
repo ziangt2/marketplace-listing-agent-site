@@ -1,0 +1,30 @@
+{
+  "Recall@5": {
+    "test": "exact_McNemar_binomial",
+    "both": 596,
+    "hybrid_only": 57,
+    "collaborative_only": 46,
+    "neither": 3255,
+    "p_value": 0.32447878028806565
+  },
+  "Recall@10": {
+    "test": "exact_McNemar_binomial",
+    "both": 960,
+    "hybrid_only": 91,
+    "collaborative_only": 67,
+    "neither": 2836,
+    "p_value": 0.06694263927535084
+  },
+  "NDCG@5": {
+    "test": "paired_sign_flip_randomization",
+    "resamples": 10000,
+    "seed": 424205,
+    "p_value": 0.21227877212278773
+  },
+  "NDCG@10": {
+    "test": "paired_sign_flip_randomization",
+    "resamples": 10000,
+    "seed": 424205,
+    "p_value": 0.050994900509949
+  }
+}

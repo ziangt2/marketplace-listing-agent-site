@@ -1,0 +1,25 @@
+{
+  "eligible_users": 3954,
+  "target_count": 3954,
+  "target_sha256": "6f73cc0d93be8f20cbcb732f9cecef24697991e3d858c9dbf62f17cbc792ad73",
+  "training_cutoff": "2026-02-15 22:51:28",
+  "training_event_rows": 267536,
+  "distinct_training_user_product_interactions": 163208,
+  "per_model_evaluated_users": {
+    "popularity": 3954,
+    "collaborative": 3954,
+    "content": 3954,
+    "hybrid": 3954
+  },
+  "per_model_target_sha256": {
+    "popularity": "6f73cc0d93be8f20cbcb732f9cecef24697991e3d858c9dbf62f17cbc792ad73",
+    "collaborative": "6f73cc0d93be8f20cbcb732f9cecef24697991e3d858c9dbf62f17cbc792ad73",
+    "content": "6f73cc0d93be8f20cbcb732f9cecef24697991e3d858c9dbf62f17cbc792ad73",
+    "hybrid": "6f73cc0d93be8f20cbcb732f9cecef24697991e3d858c9dbf62f17cbc792ad73"
+  },
+  "population_mismatch_count": 0,
+  "published_metric_max_absolute_error": 0.0,
+  "hybrid_config_sha256_before_audit": "5d1864a1ecf8c3b729c4d8e5f1d7d90739967100b4517b3db80503a35243059e",
+  "hybrid_config_sha256_after_audit": "5d1864a1ecf8c3b729c4d8e5f1d7d90739967100b4517b3db80503a35243059e",
+  "hybrid_config_modified_by_audit": false
+}

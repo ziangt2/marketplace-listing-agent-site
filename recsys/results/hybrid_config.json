@@ -1,0 +1,20 @@
+{
+  "alpha": 0.6,
+  "beta": 0.1,
+  "gamma": 0.3,
+  "collaborative_m": 100,
+  "content_m": 100,
+  "popularity_m": 10,
+  "normalization_method": "per_user_candidate_minmax",
+  "zero_variance_handling": "all normalized component scores are zero",
+  "missing_score_handling": "non-finite component scores normalize to zero",
+  "selection_source": "inner_temporal_validation",
+  "validation_grid_file": "results/hybrid_validation_grid.csv",
+  "final_test_metrics_used_for_selection": false,
+  "validation_users": 4580,
+  "validation_ndcg@10": 0.12819656675024643,
+  "validation_recall@10": 0.24497816593886462,
+  "validation_catalog_coverage@10": 0.565,
+  "inner_cutoff": "2026-02-01 22:51:28",
+  "final_cutoff": "2026-02-15 22:51:28"
+}
