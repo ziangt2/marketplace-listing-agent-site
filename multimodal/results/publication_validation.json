@@ -1,0 +1,17 @@
+{
+  "checked_at_utc": "2026-09-06T08:44:16.650358+00:00",
+  "scope": "Staged Git publication snapshot, with existing ignored RecSys test fixtures copied only into the temporary verification directory. No API calls or benchmark reruns.",
+  "tests_passed": {
+    "recsys": 20,
+    "multimodal": 22,
+    "agent": 32
+  },
+  "documentation_validators_passed": 3,
+  "credential_scan": "passed",
+  "large_file_check": "passed",
+  "log_sha256": {
+    "recsys_tests": "6a9f6572b082b5ffc1d9e7645b0bfb4d0ffe3c62a86806ca521447b1d3fa114b",
+    "recsys_docs": "2275068ea4781434289495f4e49decc3d12bcb34edf2e6e495f8147e4a62120c",
+    "multimodal_agent_tests_and_docs": "9716c29f5ab5d61678e15a076dfd3ca57c0b80b7fa36972acdefcf793ada4f63"
+  }
+}

@@ -3,6 +3,7 @@
 .env.*.local
 node_modules/
 .venv/
+.venv-multimodal/
 venv/
 __pycache__/
 *.py[cod]

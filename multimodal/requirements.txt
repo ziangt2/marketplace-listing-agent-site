@@ -1,0 +1,9 @@
+numpy>=1.26,<3
+torch>=2.6,<3
+transformers>=4.51,<5
+Pillow>=10,<12
+faiss-cpu>=1.10,<2
+sentencepiece>=0.2,<1
+protobuf>=4,<7
+rank-bm25==0.2.2
+requests>=2.32,<3

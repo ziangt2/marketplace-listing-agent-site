@@ -1,0 +1,155 @@
+{
+  "average_tool_calls": 2.9444444444444446,
+  "by_category": {
+    "comparison": {
+      "answered": 5,
+      "fully_grounded_nonempty": 5,
+      "queries": 6,
+      "routing_successes": 6
+    },
+    "image_plus_filter": {
+      "answered": 3,
+      "fully_grounded_nonempty": 3,
+      "queries": 6,
+      "routing_successes": 6
+    },
+    "image_similarity": {
+      "answered": 0,
+      "fully_grounded_nonempty": 0,
+      "queries": 6,
+      "routing_successes": 0
+    },
+    "text_lexical": {
+      "answered": 5,
+      "fully_grounded_nonempty": 5,
+      "queries": 6,
+      "routing_successes": 6
+    },
+    "text_semantic": {
+      "answered": 5,
+      "fully_grounded_nonempty": 5,
+      "queries": 6,
+      "routing_successes": 0
+    },
+    "unsupported_constraint": {
+      "answered": 5,
+      "fully_grounded_nonempty": 5,
+      "queries": 6,
+      "routing_successes": 6
+    }
+  },
+  "cache_hits": 5,
+  "categories": {
+    "comparison": 6,
+    "image_plus_filter": 6,
+    "image_similarity": 6,
+    "text_lexical": 6,
+    "text_semantic": 6,
+    "unsupported_constraint": 6
+  },
+  "constraint_queries_answered_correctly": {
+    "denominator": 24,
+    "numerator": 18,
+    "rate": 0.75
+  },
+  "constraint_satisfaction": {
+    "denominator": 33,
+    "numerator": 33,
+    "rate": 1.0
+  },
+  "delivered": {
+    "fully_grounded_nonempty_responses": {
+      "denominator": 36,
+      "numerator": 23,
+      "rate": 0.6388888888888888
+    },
+    "grounded_among_answered": {
+      "denominator": 23,
+      "numerator": 23,
+      "rate": 1.0
+    },
+    "recommendation_count": 41
+  },
+  "evaluation_scope": "36 authored development queries; no held-out agent quality claim or LLM judge",
+  "expected_tool_sequence_success": {
+    "denominator": 36,
+    "numerator": 24,
+    "rate": 0.6666666666666666
+  },
+  "invalid_tool_calls": {
+    "denominator": 106,
+    "numerator": 0,
+    "rate": 0.0
+  },
+  "limitations": [
+    "Grounding checks structured citations, not semantic relevance or real-world metadata accuracy.",
+    "All product-specific prose is rendered deterministically from validated fields, not unconstrained LLM prose.",
+    "Empty recommendations count as abstentions, never fully grounded answers; constraints also report nonempty coverage.",
+    "Agent fixtures are authored development cases, with reused held-out image views from the historical image benchmark.",
+    "Temperature zero does not promise cross-call determinism; exact-request cached replay is separately verified."
+  ],
+  "live_api_calls": 58,
+  "query_count": 36,
+  "raw": {
+    "candidate_coverage": {
+      "denominator": 42,
+      "numerator": 42,
+      "rate": 1.0
+    },
+    "counts": {
+      "candidate_valid": 42,
+      "catalog_valid": 42,
+      "evidence_items": 190,
+      "field_valid": 190,
+      "recommendations": 42,
+      "unsupported_attributes": 0,
+      "value_valid": 189
+    },
+    "evidence_field_validity": {
+      "denominator": 190,
+      "numerator": 190,
+      "rate": 1.0
+    },
+    "evidence_value_validity": {
+      "denominator": 190,
+      "numerator": 189,
+      "rate": 0.9947368421052631
+    },
+    "fully_grounded_nonempty_responses": {
+      "denominator": 36,
+      "numerator": 23,
+      "rate": 0.6388888888888888
+    },
+    "product_id_validity": {
+      "denominator": 42,
+      "numerator": 42,
+      "rate": 1.0
+    },
+    "responses_with_validation_errors": 1,
+    "unsupported_attribute_claims": {
+      "denominator": 190,
+      "numerator": 0,
+      "rate": 0.0
+    }
+  },
+  "routing_success": {
+    "denominator": 36,
+    "numerator": 24,
+    "rate": 0.6666666666666666
+  },
+  "status_counts": {
+    "abstained": 6,
+    "answered": 23,
+    "error": 7
+  },
+  "successful_tool_execution": {
+    "denominator": 106,
+    "numerator": 106,
+    "rate": 1.0
+  },
+  "unsupported_requests_acknowledged": {
+    "denominator": 8,
+    "numerator": 8,
+    "rate": 1.0
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "seed": 2027,
+  "sizes": {"dev": 500, "mvp": 1000, "standard": 5000},
+  "encoder": {
+    "model_name": "google/siglip2-base-patch16-224",
+    "revision": "75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2",
+    "batch_size": 16,
+    "device": "auto",
+    "text_template": "This is a photo of {text}.",
+    "max_text_length": 64
+  },
+  "retrieval": {"depth": 50, "rrf_k": 60, "bm25_k1": 1.5, "bm25_b": 0.75},
+  "evaluation": {
+    "min_relevant": 2,
+    "max_relevant": 50,
+    "max_relevant_fraction": 0.1,
+    "min_segment_queries": 10,
+    "latency_repeats": 3,
+    "latency_warmups": 5,
+    "encoder_latency_samples": 20
+  }
+}

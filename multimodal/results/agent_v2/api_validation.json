@@ -1,0 +1,34 @@
+{
+  "checks": [
+    {
+      "query_id": "agent_02",
+      "http_status": 200,
+      "status": "answered",
+      "products": [
+        "B0853QJ6VS"
+      ],
+      "tools": [
+        "search_text",
+        "filter_products",
+        "get_product"
+      ]
+    },
+    {
+      "query_id": "agent_19",
+      "http_status": 200,
+      "status": "answered",
+      "products": [
+        "B0853QJ6VS"
+      ],
+      "tools": [
+        "search_image",
+        "filter_products",
+        "get_product",
+        "compare_products"
+      ]
+    }
+  ],
+  "invalid_image_http_status": 400,
+  "cache_only": true,
+  "initial_attempt": "Connection timed out before server finished startup; retried after listener was ready."
+}

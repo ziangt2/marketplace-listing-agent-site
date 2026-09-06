@@ -1,0 +1,102 @@
+{
+  "query_id": "agent_19",
+  "query": "Find similar chairs, but wooden and narrower than 25 inches.",
+  "status": "answered",
+  "answer": "Selected 1 retrieved product(s) using the executed search and metadata filters. Among 1 compared candidates with reported widths, B0853QJ6VS has the smallest reported width (21.5 in). Width alone does not establish suitability for an apartment.",
+  "recommendations": [
+    {
+      "dimension_sources": {
+        "depth": {
+          "source_field": "dimensions.length",
+          "unit": "inches",
+          "value": 22.83
+        },
+        "height": {
+          "source_field": "dimensions.height",
+          "unit": "inches",
+          "value": 33.7
+        },
+        "width": {
+          "source_field": "dimensions.width",
+          "unit": "inches",
+          "value": 21.5
+        }
+      },
+      "evidence": [
+        {
+          "field": "product_type",
+          "value": "CHAIR"
+        },
+        {
+          "field": "material",
+          "value": "Ash"
+        },
+        {
+          "field": "width",
+          "value": "21.5 in"
+        }
+      ],
+      "product_id": "B0853QJ6VS",
+      "reason": "ABO reports product_type: CHAIR; material: Ash; width: 21.5 in.",
+      "retrieval": {
+        "rank": 1,
+        "ranks": {
+          "faiss_flat": 1
+        },
+        "score": 0.8926024436950684,
+        "source": "faiss_flat"
+      }
+    }
+  ],
+  "comparison": {
+    "missing_width_count": 0,
+    "narrowest_product_id": "B0853QJ6VS",
+    "narrowest_width": "21.5 in",
+    "products": [
+      {
+        "dimension_sources": {
+          "depth": {
+            "source_field": "dimensions.length",
+            "unit": "inches",
+            "value": 22.83
+          },
+          "height": {
+            "source_field": "dimensions.height",
+            "unit": "inches",
+            "value": 33.7
+          },
+          "width": {
+            "source_field": "dimensions.width",
+            "unit": "inches",
+            "value": 21.5
+          }
+        },
+        "fields": {
+          "brand": "Rivet",
+          "color": "Brown",
+          "depth": "22.83 in",
+          "height": "33.7 in",
+          "material": "Ash",
+          "product_type": "CHAIR",
+          "style": "Dining Chair",
+          "title": "Amazon Brand \u2013 Rivet Woven Dining Chair, 22.83\"W, Brown",
+          "width": "21.5 in"
+        },
+        "product_id": "B0853QJ6VS"
+      }
+    ],
+    "width_count": 1
+  },
+  "limitations": [
+    "ABO metadata is sparse and may be inconsistent. Attributes and axis labels are reported as supplied; depth uses source length.",
+    "Filters apply only to retrieved candidates; missing fields fail. No catalog-wide completeness guarantee.",
+    "Wood matches the documented family of reported material labels; this does not establish all-wood construction."
+  ],
+  "latency": {
+    "all_tools_ms": 26.639916992280632,
+    "llm_api_ms": 2491.9740430195816,
+    "llm_wall_ms": 2494.3660829449072,
+    "retrieval_ms": 26.426500000525266,
+    "total_ms": 2522.5999579997733
+  }
+}

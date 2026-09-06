@@ -1,0 +1,96 @@
+{
+  "broad_lexical_retry_k": 100,
+  "cache_only": true,
+  "encoder": {
+    "batch_size": 16,
+    "device": "mps",
+    "dtype": "float32",
+    "embedding_dimension": 768,
+    "model_name": "google/siglip2-base-patch16-224",
+    "model_revision": "75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2",
+    "normalization": "L2",
+    "preprocessing": {
+      "color_mode": "RGB",
+      "exif_transpose": true,
+      "image_processor": {
+        "_processor_class": "SiglipProcessor",
+        "do_convert_rgb": null,
+        "do_normalize": true,
+        "do_rescale": true,
+        "do_resize": true,
+        "image_mean": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "image_processor_type": "SiglipImageProcessor",
+        "image_std": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "resample": 2,
+        "rescale_factor": 0.00392156862745098,
+        "size": {
+          "height": 224,
+          "width": 224
+        }
+      },
+      "lowercase": true,
+      "max_length": 64,
+      "padding": "max_length",
+      "text_template": "This is a photo of {text}.",
+      "truncation": true
+    },
+    "torch_version": "2.14.0",
+    "training": "none; pretrained weights are frozen",
+    "transformers_version": "4.57.6"
+  },
+  "evidence_window": 8,
+  "max_recommendations": 3,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "prompt_versions": [
+    "abo_search_plan_v2",
+    "abo_grounded_selection_v2"
+  ],
+  "provider": "openai",
+  "python": "3.11.15",
+  "query_count": 36,
+  "query_split": "authored development",
+  "source_sha256": {
+    "config/default.json": "9beee9e2a8b8380531c027e21b08a8d4db64e3a9fa9f7e1da21cf594088e02df",
+    "data/manifests/agent_queries_v1.jsonl": "638b4a68cc07453c35ab0e9e7a3ac2400c1aaddbbe136377e6e6a27b6ebe0a3d",
+    "data/manifests/catalog_mvp.jsonl": "7d86828dc767f3b7b6b80c768cf903b945ea40262219477539775189f1f86064",
+    "src/__init__.py": "4c911e57873e7c2c0f4b5afcb7b0accc0e649b14c59b2a61fc865ccb2271aabc",
+    "src/abo_dataset.py": "af1f32afe99290b6aa05142d6e18ca9349ea58359699593ac990221e44b1bd14",
+    "src/agent_benchmark.py": "e8724b7b25201891f45f2d4bcc0c55fd02d56634f41cecc29d6256f286bfeb52",
+    "src/agent_report.py": "6d8a75ebdf1b47c556daa1052c23b65f7e7fbb3aec2b4fe19830c99484e6ab15",
+    "src/agent_server.py": "01cf76bd72b1cf312044b035f9fbb44de564d15c4c18381106e9310f3df9a6bb",
+    "src/agent_tools.py": "52f1278888b4f1fbbbefabf4beade0a6281678c91d4a9a9b371180551ceabcc3",
+    "src/benchmark.py": "a05f7109f8b80309660f641e3387a5e3da3b769dea84a307df78cbb3daa19065",
+    "src/build_catalog.py": "be7b5f43d810a0e48fd4273c716a4ac8598eecd3e755d52d1275a5473fe3f51f",
+    "src/build_embeddings.py": "3abd876d909fdb4f493509ac5db73c3e41c216337f1eada36b76be9d2e3416da",
+    "src/config.py": "932d36f8efd8784092b8e679d7898f935192c546e925e5a9d40c67831b0ee07d",
+    "src/embedding_model.py": "f748ccda13f7b71592fe7d506c4094dce2175582a0163f69f07b7026c89c2d52",
+    "src/encoder_worker.py": "5fa4d151f30f431ab207ac68a273bd4a84310dc715e43c64b9211574afc95223",
+    "src/exact_index.py": "7e77b0d868063ca9036e473b5d31185b0b0f44c5481928914536d8d4ed6ec6d3",
+    "src/grounding.py": "e4986730d5ad8f29b39040b2f5abf5a98985a42c05a4399898e09b01d17db412",
+    "src/hybrid_retrieval.py": "9fd9adb503cf6f89ebf22a6d57b18b8517ccb140cdd55547753526176498b76f",
+    "src/io_utils.py": "2fe407179b5a9a9e1dc6d0e18c79858613966b580ec87c60a5e31123053f8948",
+    "src/latency.py": "f3813f4c8006d908859f9b74bac43037d265cea09676dfc78dfe194a1805da4f",
+    "src/lexical_retrieval.py": "dabdba7a2d19e9252e7bd76de3ee0965c47602ae72277611462766fc66c959a3",
+    "src/llm_provider.py": "ad77be1a398e02ee640f63d1b190969ebcac73913ae03340978bb72496ceef35",
+    "src/metrics.py": "13fbee14fed303f81134980fe6c5edb3ecdc8629fcafa29efac3fe53ec4e3eff",
+    "src/product_agent.py": "75d1baf7073e5504d3899e2d35e92811dbc9d2db95b543fc31e124f0c7deafce",
+    "src/product_evidence.py": "9bc4d5b877671f8b5d2a89dbc1af3e9442f2bda88de20396b262c92262b18a9f",
+    "src/queries.py": "63249d0aaf812433a9e64af3e3e773aecf38d768a70e5c0751e29db3ee53ccd3",
+    "src/report.py": "83112e12eead81964ba4b9bd5a622dcc8f2580308fe804f0817f95699f76c196",
+    "src/search.py": "50403922aa89d0c046abb2247ac07ec17f073edbc3beb47807c9d2d53dfce248"
+  },
+  "startup_ms": 3110.3644999675453,
+  "temperature": 0,
+  "timestamp": "2026-09-06T08:25:57.306232+00:00",
+  "tool_budget": 8,
+  "top_k": 50
+}

@@ -1,0 +1,10 @@
+{
+  "compared_queries": 36,
+  "ignored_fields": [
+    "latency telemetry",
+    "cache/API telemetry"
+  ],
+  "live_api_calls": 0,
+  "matches": true,
+  "source_runs_sha256": "64a79b8c95d5f201b4aff22638b818a6a751f5363f905fd7d9856f83a90a4820"
+}

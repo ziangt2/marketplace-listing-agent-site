@@ -1,0 +1,27 @@
+{
+  "all_tools_ms": {
+    "p50": 3.7366250180639327,
+    "p95": 10.877416760195047
+  },
+  "llm_api_ms": {
+    "p50": 0.0,
+    "p95": 0.0
+  },
+  "llm_wall_ms": {
+    "p50": 0.5511455237865448,
+    "p95": 1.514791467343457
+  },
+  "method": "Sequential warm agent requests. Retrieval includes encoding IPC; LLM wall includes API or cache lookup. API latency excludes cache replay. Total includes planning, tools, validation, generation; local model/index startup is separately recorded.",
+  "retrieval_ms": {
+    "p50": 3.615875029936433,
+    "p95": 10.814041263074614
+  },
+  "samples": 36,
+  "startup_excluded": true,
+  "startup_ms": 3110.3644999675453,
+  "total_ms": {
+    "p50": 4.868791496846825,
+    "p95": 11.726030992576852
+  },
+  "unit": "ms"
+}

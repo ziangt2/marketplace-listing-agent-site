@@ -1,0 +1,156 @@
+{
+  "base_commit": "14583aa44bb6578ca3a41d39e261a43c9b3e8fa5",
+  "scope": "The three pre-existing user edits remain local and are excluded from the feature publication. Both original local-audit and committed-baseline checksums are recorded; no benchmark measurement was regenerated. CSV-only CRLF-to-LF normalization follows the existing .gitattributes; field values are byte-identical after newline normalization.",
+  "preexisting_uncommitted_files": {
+    "recsys/README.md": {
+      "local_baseline_sha256": "c75b25e4e0214304be8ddb4fba2706179f3609e558bd7ba99658a6957861851b",
+      "published_baseline_sha256": "947e1a25e953d264b06693d3ce1e31186b1bef1b49f6059634d1c551533ca026"
+    },
+    "recsys/RESUME_EVIDENCE.md": {
+      "local_baseline_sha256": "0be419ec3673ec1b1fec1b5818e195921eae1cfd1494f3b9abe029e2d4b1627e",
+      "published_baseline_sha256": "8f0161063dc805e84a3c4f6efa718cd81f5f3e56db407df1c03f6253e7e2d38e"
+    },
+    "recsys/results/run_metadata.json": {
+      "local_baseline_sha256": "8ce406af3da08455c770b94650012965fd78fe2b07fffbcc430a977a51fa7f4c",
+      "published_baseline_sha256": "9223f12903c2e1c9900abd98f8ed575b51ee2316a303171319f677731254aca6"
+    }
+  },
+  "git_text_normalization": {
+    "multimodal/results/dev/hybrid_retrieval.csv": {
+      "local_baseline_sha256": "7647a43a51d7d278f5b35945cd22b54142c2144e9227b4eddf1de05c35274f68",
+      "published_baseline_sha256": "ecface9ccce3ef2fbd7a1eeafc899ea074e50d5509c48ddda848406b8e6c5566"
+    },
+    "multimodal/results/dev/image_retrieval.csv": {
+      "local_baseline_sha256": "b0d63846eb944a7c98b241842ae4721f05445658caf5ee45d4b4d1da4ca4fb99",
+      "published_baseline_sha256": "4a5a311563d5aef1b17dfab55c5da3aa676b13b9283005e8a7881d97fafd061a"
+    },
+    "multimodal/results/dev/latency_samples.csv": {
+      "local_baseline_sha256": "89db0ab1622c31766a85a5af49fe7b7e847ff06566c3af6fc1358a6ae7435f9c",
+      "published_baseline_sha256": "a1bbd63016083107e0ab2505a3d848f788c3b7c21ffef242d43728fe3fae001e"
+    },
+    "multimodal/results/dev/per_query_metrics.csv": {
+      "local_baseline_sha256": "e743e4faf9c2e32861d847f7605a1b72ed06d7ad9715823499ea1ddb8e5125eb",
+      "published_baseline_sha256": "c3d14d113a7de02b9692133d2ec8c7f1e92417c708c79377a8b91d8921d7dccb"
+    },
+    "multimodal/results/dev/query_segment_metrics.csv": {
+      "local_baseline_sha256": "7f23faca91fa3213fe5990e84ebe608f560edd8cd4c9de400ac374a48494a469",
+      "published_baseline_sha256": "0c2f00c13d40c945f7fcfa02c6eb9a45eb34c743eb906a7d00422486c8372614"
+    },
+    "multimodal/results/dev/source_complementarity.csv": {
+      "local_baseline_sha256": "2f872d501abb807781170ce55f9a58ea09d28b89ad3e76b63853e8524efe53a9",
+      "published_baseline_sha256": "21253ec6b90ab73874744a833a9e597ab7d3e87ddabd5bc8dfa15eeff10198b9"
+    },
+    "multimodal/results/dev/text_retrieval.csv": {
+      "local_baseline_sha256": "7aa002441ad9de544ec4b58924c4c5d617f9d50bfbe93ca7a3e62be6084f9877",
+      "published_baseline_sha256": "c4111369f8c2d5a225a40f856d1debc3b3b8a4c17e3fab5d85002ff58f0a0f91"
+    },
+    "multimodal/results/mvp/hybrid_retrieval.csv": {
+      "local_baseline_sha256": "4993dacf6a9ecad8e956a9728095c767855abd763888fa47907161a49a50841d",
+      "published_baseline_sha256": "87f6bb17ee9d36620445817711ae5ad38d8d10a29ee2eac16a0f4e0bbf011e37"
+    },
+    "multimodal/results/mvp/image_retrieval.csv": {
+      "local_baseline_sha256": "a9a8a82f44f94ea252a08698b74dd22e464a65c46f21e2a29a6480d419287e1a",
+      "published_baseline_sha256": "ddff040aa7532e16c32710b972a28205d627e79a78d38eb7c80ca8616339eb87"
+    },
+    "multimodal/results/mvp/latency_samples.csv": {
+      "local_baseline_sha256": "8fe7bd534bd3685f00deb6342828dd942797a7ff38ee1da81e63088f1a2e13ad",
+      "published_baseline_sha256": "93934aeeaf6a59d72092aae27248edbdc1bc294eb931b2908d088fa20a23f2a5"
+    },
+    "multimodal/results/mvp/per_query_metrics.csv": {
+      "local_baseline_sha256": "dc5138a275082fb9c1d44c949c1c45b141acfbe6d61704a80b6e3985fb1301fe",
+      "published_baseline_sha256": "801371598209467b854617e13a3b2493d7ed0134e238f55f0ed940d11e5acc85"
+    },
+    "multimodal/results/mvp/query_segment_metrics.csv": {
+      "local_baseline_sha256": "c29a80d0059d3257626ee4002cebdd00c5b1cfcffb248ade5941f4b364eefc75",
+      "published_baseline_sha256": "4302a6e4438ba81b05db2d84e5a0158dfa13088060f6f41f07211ad0334d8273"
+    },
+    "multimodal/results/mvp/source_complementarity.csv": {
+      "local_baseline_sha256": "2fd2e47e11dfce41002a86bd03eae0c403ad64e7d07cbbc19842ba014b742749",
+      "published_baseline_sha256": "82cc42dade099bbf4ece7651d744c16f82799477f3300ea8e63e5b012fef04f9"
+    },
+    "multimodal/results/mvp/text_retrieval.csv": {
+      "local_baseline_sha256": "76d29672887942facdfefb78606dc95b82c53458f5e8c8b779bff85777f2fc7b",
+      "published_baseline_sha256": "ccf028ebd9be5af1ab5fe0dfe6cbb6459da17bcfc1b6cf6f1a08641517bb00bd"
+    },
+    "recsys/results/ab_test_results.csv": {
+      "local_baseline_sha256": "d0d02b2ab1e03e48bf48ed1dfe3ccaa832b40d808b701edf503c8fa47568b391",
+      "published_baseline_sha256": "38763b5785c60c591fcad357721ff667c5c88c59457eb79a32b917b016173559"
+    },
+    "recsys/results/category_metrics.csv": {
+      "local_baseline_sha256": "202714a5a62b79463c176214debf27a0bc1e6af0c1bbdf930f8977e9ad09ef73",
+      "published_baseline_sha256": "09aafe4d123360877125ca85d0d48abd12f22ffbfc8949d9b1a85fb9d14e5fc2"
+    },
+    "recsys/results/component_contribution_audit.csv": {
+      "local_baseline_sha256": "2e3c12666c0e9dd71dcb9f5a3d3b5a3da16cd1c9961133354c69f743cc083a9a",
+      "published_baseline_sha256": "8f600fe6092ceefbc2da1614e50039c7e317798e2888e7ae28bae64aaf5d4438"
+    },
+    "recsys/results/content_history_metrics.csv": {
+      "local_baseline_sha256": "c5dbb4691fa82c40f1ef75b76a913ea7d95b3107c4e0d28781d65787b6bee03e",
+      "published_baseline_sha256": "9929364a475c0a2d1d823f6c12f40987f45edb8c92d75695d87ef5224bdc0258"
+    },
+    "recsys/results/funnel_metrics.csv": {
+      "local_baseline_sha256": "b86abe4096a27ea166403188e7692838064eaa914ef86bd50a43ddf6ab1d0ce3",
+      "published_baseline_sha256": "725b9c3ac6ccb2881a2b69453fc11e0261c00034e3f82296d8be2a693f752db7"
+    },
+    "recsys/results/history_bucket_metrics.csv": {
+      "local_baseline_sha256": "a499eb4e1c7796a9921cea3d52ed701e991e763d15eb5b8bdcf6ab9631c7f754",
+      "published_baseline_sha256": "1abc2fa06aa48c0cc48cd53a397b74b4bc2bcd71abfa5de657bd731f9e384cac"
+    },
+    "recsys/results/hybrid_bootstrap_ci.csv": {
+      "local_baseline_sha256": "f0a2ed0fc7fbc8888119a1b9698d973ef460592935e5cfc6a80f8cb0c163ab34",
+      "published_baseline_sha256": "198f9b0fc462ba9770201bb70dfd716ec88b4b10fd6267fa84df734f6638ea94"
+    },
+    "recsys/results/hybrid_improvements.csv": {
+      "local_baseline_sha256": "bf84e97bbe9b342aaa5c18628846c6b0e046e288eb6fc7f2936c72b7e07b1ad6",
+      "published_baseline_sha256": "02ab3a355ac5e9a4914a5d58936dd7cbe5da405c4ce18bb13bd30834749e1be6"
+    },
+    "recsys/results/hybrid_validation_grid.csv": {
+      "local_baseline_sha256": "ac818fc58256806d3ce4eba370b831e841c8c4cd237a71db8c417deee75b10cb",
+      "published_baseline_sha256": "36fc98fb93b459f93e9f9600823e0a5746ced606f0b38ff09a0ae049bc0e3d36"
+    },
+    "recsys/results/hybrid_win_loss_analysis.csv": {
+      "local_baseline_sha256": "8bca5c5e3b3a079ce2560c00d4031852102e121b587046ab8bc77c2670cf9808",
+      "published_baseline_sha256": "3e9c2b10e3db799a0c3c485723cbb85972a601936d38afcd535b2ef28f01b610"
+    },
+    "recsys/results/model_comparison.csv": {
+      "local_baseline_sha256": "dd62a2308829c49922e7cd77f7c8ea149e2e014e987c7696c5cc87f4f43d5f56",
+      "published_baseline_sha256": "3a2f35ef29cd2d7b9b9b2d5d55abebf823d7b98993304f3c8351d2facba63d6a"
+    },
+    "recsys/results/per_user_final_metrics.csv": {
+      "local_baseline_sha256": "fc02f8ff9c55c3f6177853217b9637a3ede6945536eb22e504dd575e310870a1",
+      "published_baseline_sha256": "5094319c71c1301983160f77b065714433e16a7419008ea2ef133f980984d963"
+    },
+    "recsys/results/popularity_bias_diagnostics.csv": {
+      "local_baseline_sha256": "8f7363c86d4ebbb019f70f72de6b7f3bd0a8021ab33aa5d931e8552a54c6d954",
+      "published_baseline_sha256": "0946ae7a93e747e009d3ceeafdf9e0121c1505b4b3c32d7e111d8f52c7581d87"
+    },
+    "recsys/results/recommendation_diagnostics.csv": {
+      "local_baseline_sha256": "c7b23bdf4eb43d85aa24dc17189b91f94fe24cee8a5ab57e01c4392c3fa92ab0",
+      "published_baseline_sha256": "f528784c34e175b095ef329f4ae66d4a081a7dae84898814df300ae7994c738f"
+    },
+    "recsys/results/recommendation_metrics.csv": {
+      "local_baseline_sha256": "d4db9ec3d067ed30fbfd6d8ac145085ea76885592367b6f831723c1d2799b4cd",
+      "published_baseline_sha256": "d0815e180912da2ab2bf9065b3814cdd42076fd6e965a55a96aefd4bdab08dd8"
+    },
+    "recsys/results/recommendation_segment_metrics.csv": {
+      "local_baseline_sha256": "b8e5cccea97c81d317d335cbb3e5fcffc5de52ec6739c55c93c0898f2a429da0",
+      "published_baseline_sha256": "e7da333821c7ab0ea213f81021ba8d9639c3e6fe0ab77dfec0d1bf188ba771ef"
+    },
+    "recsys/results/retention_metrics.csv": {
+      "local_baseline_sha256": "e18d6d57de7003e13dfc4ab7586ef37de31552c17bda214c530642fef65f9a59",
+      "published_baseline_sha256": "c6c2eae4e95cff9e8c2cd0429fa99c87677c8e3985d3bcf8bcaaea56860777df"
+    },
+    "recsys/results/retrieval_diagnostics.csv": {
+      "local_baseline_sha256": "b575409eebc57e6de51a21fdbadc6cc45416145b15be80d86837528b02e00326",
+      "published_baseline_sha256": "20e30b0bc383ff8e505220b0b49c5c699a6e1bce33035d126b548cc841fd9f30"
+    },
+    "recsys/results/retrieval_vs_ranking_analysis.csv": {
+      "local_baseline_sha256": "86e756c7549e21c74eba466e81954dec0e11b5fac3457ee02760f7577d3be392",
+      "published_baseline_sha256": "207d5664c781f71c6f658487cd76c8ed44c3791dff15c536a403736b72b2faa4"
+    },
+    "recsys/results/sparse_history_audit.csv": {
+      "local_baseline_sha256": "d818e2544258f910e5351b025df398d863ad95bc336bbd2fc8c03dcd79f7488f",
+      "published_baseline_sha256": "dd7a91304ddcb0ab78b59d3d4088c2dd1372bfdcf65741f4f5b2d9a509b8c65b"
+    }
+  }
+}

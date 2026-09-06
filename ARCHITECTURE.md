@@ -1,6 +1,6 @@
 # Architecture — E-commerce Search & Recommendation Platform
 
-This repository contains two independently runnable subsystems with a shared search-and-recommendation vocabulary. The Marketplace application gathers and ranks keyword evidence. The RecSys benchmark evaluates candidate retrieval and recommendation ranking on deterministic synthetic behavior. They do not share live production data.
+This repository contains three independently runnable subsystems with a shared search-and-recommendation vocabulary. The Marketplace application gathers and ranks keyword evidence. The RecSys benchmark evaluates candidate retrieval and recommendation ranking on deterministic synthetic behavior. The multimodal module evaluates pretrained image/text product retrieval using real public ABO catalog data. They do not share live production data or benchmark outcomes.
 
 ## Marketplace ingestion
 
@@ -105,6 +105,7 @@ The Node server and Vercel configuration expose:
 | Product metadata | Deterministic synthetic generator | Yes |
 | Sessions and events | Deterministic synthetic generator | Yes |
 | A/B assignment and outcome | Deterministic synthetic generator | Separate experiment |
+| ABO product images and metadata | Public Amazon Berkeley Objects research dataset | No; separate multimodal retrieval benchmark |
 
 Small result CSV/JSON files are retained for inspection. Large raw synthetic files and the SQLite database are reproducible and ignored by Git.
 
@@ -117,3 +118,113 @@ Small result CSV/JSON files are retained for inspection. Large raw synthetic fil
 - Every final target user has at least three historical products; the project does not evaluate true new-user cold start.
 - Hybrid mean gains over Collaborative are small and are not statistically established at the 0.05 level overall.
 - There is no live recommendation endpoint, production traffic, distributed trainer, online feature store, or online recommender experiment.
+
+## Multimodal Product Retrieval
+
+The implemented `multimodal/` MVP is independent of the historical synthetic
+behavioral pipeline. It adds public ABO catalog ingestion, pinned pretrained
+SigLIP2 inference, exact image-vector search, BM25, and RRF.
+
+```text
+Public ABO English listing metadata + selected small catalog images
+    ↓ deterministic item selection; identity, byte and pixel checksums
+Catalog manifest in product-ID order
+    ├─ Indexed image → frozen SigLIP2 image encoder → L2 vectors → content cache
+    │                                                        ↓
+    │                                    NumPy exact / FAISS IndexFlatIP
+    ├─ Distinct, unambiguous alternate view → image query ─────┤
+    └─ Type + structured attributes → text query encoder ─────┤
+                                                             ↓
+                                                    Vector Top-50
+Product text metadata → BM25 Top-50 ───────────────────────┐
+                                                         ↓
+                                              Reciprocal Rank Fusion
+                                                         ↓
+                                     Top-K + per-query evaluation artifacts
+```
+
+The shared image/text representation comes from pretrained weights; no training
+or fine-tuning takes place. The model abstraction exposes `encode_text`,
+`encode_images`, `encode_image`, model name and embedding dimension. The first
+encoder uses the pinned SigLIP2 base checkpoint. All library imports are under
+`multimodal.src`; historical RecSys modules are neither imported nor changed.
+
+A persistent local encoder worker isolates PyTorch from FAISS because the tested
+macOS wheels otherwise initialize incompatible copies of OpenMP. It communicates
+synchronously through private pipes. This is process isolation for local inference,
+not distributed serving. Query-inclusive latency includes communication; exact
+vector-search latency is recorded separately. CPU works, MPS is used for the main
+run, and CUDA selection is implemented but not verified.
+
+Image identity queries exclude any view equal to an indexed image by ID, bytes,
+or decoded pixels, and views shared by multiple products in the selected catalog.
+Text qrels are all products matching the declared structured attribute conjunction.
+No query contains a product/model identifier or a copied full title. These labels
+favor lexical retrieval and do not constitute independent human relevance judgments.
+
+All methods share the same query sets, catalog and metric implementation. The
+benchmark records Recall, NDCG, MRR, source complementarity, product-type segments,
+and explicit latency scopes. Configuration is fixed before scoring, with no
+training or tuning. Image holdout does not imply unseen product identities.
+`IndexFlatIP` is exact, not ANN; HNSW was left out of the urgent MVP.
+
+The historical retrieval entry point remains `python -m multimodal.src.search`.
+Its original benchmark results are unchanged. The grounded agent extension below
+adds a separate CLI and local API. See [the module](multimodal/README.md)
+and [machine-readable results](multimodal/results/README.md) for implemented facts.
+
+## Agentic Multimodal Product Search
+
+```text
+User text + optional image
+    ↓ structured OpenAI plan (requested constraints, comparison intent)
+Bounded tool dispatcher (maximum 8 calls)
+    ├─ Explicit product/category text → existing BM25
+    ├─ Attached image → existing SigLIP2 worker + FAISS
+    └─ Ambiguous description → existing RRF, or planner-selected vector search
+    ↓ actual retrieved product IDs + source/rank/score
+filter_products → inspect results → at most one broader lexical retry
+    ↓ at most 8 eligible evidence records; get_product inspection
+LLM selects up to 3 products and structured field/value citations
+    ↓ deterministic ID, field and normalized value checks
+compare_products on validated IDs when requested
+    ↓ deterministic factual answer rendering + limitations + complete trace
+```
+
+`product_evidence.py` projects only populated ABO fields. Dimensions retain their
+source units/axis and are normalized to inches; depth explicitly maps to source
+length. Missing values fail filters. Material `wood` is a documented family
+match for reported wood/ash/pine/bamboo/MDF/hardwood labels, not an assertion of
+all-wood construction. Category means the supplied `product_type`, whose quality
+is not independently verified. No material or size is inferred from an image or title.
+
+`agent_tools.py` validates tool names, argument sets, types, limits, constraints
+and request-scoped candidate IDs before execution. `product_agent.py` performs
+the bounded control flow, records every actual call/result/error, and withholds
+recommendations after a provider, tool or grounding failure. Tools are local,
+synchronous functions; the encoder worker only isolates native runtimes.
+
+`llm_provider.py` uses the existing OpenAI credential convention and a pinned,
+configurable hosted model through the Responses API. Strict JSON schemas bound
+planning and evidence selection. The cache keys the full prompt, schema, payload,
+model and temperature; API latency, cache lookup latency, timestamps, token usage
+and response IDs are separate. Credentials are never serialized into traces.
+
+The validator checks all structured product claims against retrieved metadata.
+Numerically equivalent dimensions with supported units are canonicalized within
+the six-decimal conversion tolerance. Additional free-form answer/reason fields
+are rejected. The application writes reasons from accepted citations and computes
+width comparisons itself. This guarantees a bounded claim surface; it does not
+measure relevance, real-world product truth, or room suitability.
+
+`agent_benchmark.py` evaluates the frozen authored fixtures against independent
+expected tool/constraint annotations and original catalog fields. Raw drafts,
+rejections, abstentions, denominators and local/API latency are retained. The first
+development run remains in `results/agent_v1`; repaired behavior is measured in
+`results/agent_v2`. See [measured agent evidence](RESUME_EVIDENCE.md#agentic-multimodal-product-search).
+
+The optional `agent_server.py` exposes `POST /api/agent/search` on loopback port
+8067 using the repository's JSON route convention. It accepts a registered ABO
+image ID, while the CLI also accepts local image files. This sequential local
+service has no browser frontend or production authentication/deployment. The
+existing Node server and its endpoints retain their behavior.

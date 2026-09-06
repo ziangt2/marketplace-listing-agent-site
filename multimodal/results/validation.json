@@ -1,0 +1,56 @@
+{
+  "checked_at_utc": "2026-09-06T08:02:04.767702+00:00",
+  "checks": [
+    {
+      "command": "make test",
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "command": "make verify-docs",
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "command": "make multimodal-test",
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "command": "make multimodal-verify-docs",
+      "exit_code": 0,
+      "status": "passed"
+    }
+  ],
+  "baseline": {
+    "recsys_tests": 20,
+    "status": "passed",
+    "documentation": "passed"
+  },
+  "historical_recsys_files_checked": 48,
+  "historical_changes_since_baseline": [],
+  "preexisting_user_changes_preserved": [
+    "recsys/README.md",
+    "recsys/RESUME_EVIDENCE.md",
+    "recsys/results/run_metadata.json"
+  ],
+  "multimodal_tests": 22,
+  "measured_source_hash_mismatches": [],
+  "ignored_raw_images_embeddings_indexes_environment": true,
+  "cpu_smoke": {
+    "device": "cpu",
+    "dimension": 768,
+    "model": "google/siglip2-base-patch16-224",
+    "status": "passed",
+    "test": "one real catalog image + one text, finite normalized shape checks"
+  },
+  "cli_smoke": {
+    "text_hybrid": "passed; three real results with RRF provenance",
+    "image": "passed; real held-out target in Top-5"
+  },
+  "benchmarked_profiles": [
+    "dev",
+    "mvp"
+  ],
+  "training_or_fine_tuning": false
+}

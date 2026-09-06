@@ -1,5 +1,8 @@
 # Interview Notes — E-commerce Search & Recommendation Platform
 
+The opening explanation describes the original Marketplace/RecSys work. The
+subsequent public-ABO retrieval and agent extension is covered in the final section.
+
 ## 60-second project explanation
 
 I built two related systems around retrieval, ranking, and evidence quality. The Marketplace web app expands multilingual product queries, gathers public suggestions and uploaded report evidence, extracts and categorizes keywords, and ranks them with transparent features without pretending that the score is search volume. The RecSys module uses deterministic synthetic behavioral data and product content modeled after that keyword/category schema. It retrieves candidates with item-item Collaborative, TF-IDF Content, and Popularity sources, unions them, normalizes scores per user, and applies a validated Hybrid ranker. I separated inner temporal model selection from a frozen later test, reconstructed metrics from per-user outcomes, and used bootstrap and paired tests. Hybrid had modest mean gains, but the overall comparison was not significant at 0.05, which I report directly.
@@ -35,6 +38,44 @@ I would define online objectives and guardrails first, instrument exposure and p
 ## Limitations
 
 The recommendation benchmark, product metadata, and A/B outcome are synthetic. Marketplace inputs are public suggestions or user-provided reports, not proprietary platform data. The keyword ranker is heuristic, the recommendation models are lightweight, and there is no production serving, traffic, online recommender test, distributed training, or true zero-history evaluation.
+
+## Agentic Multimodal Product Search
+
+I extended the separate public ABO retrieval module with one bounded agent and
+grounded generation. Explicit category/text requests use BM25 because it beat
+SigLIP2 text vectors and RRF on the existing structured-text benchmark. Attached
+images use pretrained SigLIP2 plus FAISS. Ambiguous descriptions use semantic
+retrieval; mixed requests execute metadata filters. The LLM plans and selects
+evidence, while actual tool functions perform search, filtering and comparison.
+
+I restricted the LLM's factual output to product IDs and field/value citations.
+A deterministic validator checks candidate membership, field availability and
+normalized values; the application renders factual reasons and width comparisons.
+This avoids pretending that matching citations validates arbitrary free-form prose.
+The source catalog is sparse and sometimes inconsistent, so even a grounded claim
+is only faithful to ABO metadata. A small-apartment preference cannot become an
+invented width threshold or a promise that furniture fits.
+
+The evaluation is an authored development set, not an independent held-out agent
+test. I preserved the first run, repaired failures, reran the same fixtures, and
+verified exact cached replay. I report raw model failures, withheld drafts,
+abstentions and answer coverage alongside citation fidelity. The first run exposed
+an unused image fallback validation error and a unit-equivalence false rejection;
+the later run still exposed unsupported and malformed citations, which were
+withheld. It also shows limitations in LLM constraint extraction, including overly
+strict material matching and inferred categories. Routing success does not prove
+the recommended products are relevant.
+
+Use the generated [resume evidence](RESUME_EVIDENCE.md#agentic-multimodal-product-search)
+for the measured numerators, denominators and latency. The [per-query traces](multimodal/results/agent_v2/agent_runs.jsonl)
+show real calls; [the replay audit](multimodal/results/agent_v2_replay/replay_validation.json)
+shows semantic output equality without another live model evaluation. Local
+retrieval and hosted LLM/API time are separate. The optional loopback JSON API is
+a demo service, not a cloud deployment.
+
+I should not claim model training, proprietary Amazon search access, production
+scale, online impact, Azure, multi-agent autonomy, general hallucination elimination,
+unseen-product generalization, or that RRF beat BM25 on the original text benchmark.
 
 ## A/B test result and why non-significance is acceptable
 
