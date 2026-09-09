@@ -1,22 +1,43 @@
 # E-commerce Search & Recommendation Platform
 
-> Marketplace keyword retrieval, multi-signal ranking, behavioral recommendation, and reproducible offline experimentation.
+> An end-to-end e-commerce ML project covering recommendation, multimodal retrieval, and grounded product search.
+
+## What it does
+
+- Builds personalized recommendations from collaborative, content, and popularity candidate sources followed by hybrid ranking.
+- Retrieves products from text or images using BM25, SigLIP2 embeddings, and FAISS.
+- Supports grounded product search with constraint checking and cited product evidence.
+- Includes temporal evaluation, leakage checks, reproducible experiments, and automated tests.
+
+## Results
+
+**Recommendation**
+
+- 330,270 events across 15,000 users and 600 products
+- Hybrid Recall@10: **0.2658**
+- Hybrid NDCG@10: **0.1374**
+
+**Multimodal retrieval**
+
+- Evaluated on 1,000 public Amazon Berkeley Objects products
+- Image → product Recall@10: **0.8929**
+- Image → product MRR: **0.7811**
+
+**Product search agent**
+
+- 36/36 correct initial routes
+- 123/123 successful tool calls
+- Invalid or unsupported answers are withheld rather than returned
+
+## Tech
+
+Python · PyTorch · FAISS · SigLIP2 · SQL · BM25 · Node.js
+
+## Architecture
 
 This repository combines three implemented systems: a Node.js web application for public-source marketplace keyword intelligence, a Python behavioral recommendation benchmark, and pretrained multimodal product retrieval over public ABO listings, now extended with grounded RAG and one tool-using Product Search Agent. The shared theme is evidence-driven search and recommendation: collect observable signals, distinguish retrieval from ranking, preserve data provenance, and evaluate with explicit task boundaries. Temporal splits apply to the behavioral RecSys; the separate ABO benchmark uses held-out image views and metadata-derived text queries. Agent evaluation uses authored development queries.
 
 The systems are related conceptually but not joined by live production data. The offline recommender uses deterministic **synthetic** product metadata modeled after the Marketplace Agent's keyword/category feature schema; live marketplace data is not used in the reported recommendation metrics. The new [multimodal module](multimodal/README.md) uses real public ABO catalog images and metadata, with its own manifests, tests, and results. Its measurements are reported separately below.
-
-## Highlights
-
-- Expands marketplace queries across public suggestion sources, market/language variants, and intent modifiers, then collects them concurrently with deterministic limits.
-- Extracts and deduplicates unigram, phrase, hashtag, and Chinese-character keyword candidates before rule-based category assignment and feature-based ranking.
-- Preserves a strict data policy: absent real uploaded measurements, search volume, official heat, GMV, sales, reviews, and growth fields remain blank.
-- Retrieves recommendation candidates independently from Collaborative, Content, and Popularity sources before normalized Hybrid ranking.
-- Tunes Hybrid configuration on 4,580 inner temporal validation targets and reserves 3,954 later targets as a frozen final test.
-- Reconstructs published metrics from paired per-user outcomes and reports bootstrap confidence intervals, McNemar tests, paired randomization tests, and failure analysis.
-- Rebuilds the synthetic benchmark, SQL analytics, recommenders, statistical audit, and evidence files with one command.
-
-## Architecture
 
 ```text
 Marketplace Search / Keyword Intelligence
